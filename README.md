@@ -33,3 +33,5 @@ Backtracking through all possible filling possibilities and return the result of
 	print(a[0].color_board)
 	plot_mat(a[0].color_board)
 ```
+![image](https://github.com/Jiayuan-Shi/Bin_packing_python/assets/51028227/dffd53d4-8bb6-44ff-aab2-71684939f8bb)
+
