@@ -2,7 +2,7 @@
 ## Purpose
 python回溯算法，实现任意形状物品装入任意形状2D方格的装箱
 
-Backtracking algorithm to realize the bin packing of any shape items into any shape 2D squares
+Backtracking algorithm to realize the bin packing of any shape items into any shape 2D squares using python
 ## 原理
 ## Principle
 回溯遍历所有可装满的可能，返回装箱结果
