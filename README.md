@@ -15,7 +15,7 @@ Backtracking through all possible filling possibilities and return the result of
 ### Input
 
 ```
-	# [[rows, cols, mat, amount], … ]
+	# [[rows, cols, mat, amount], … ] , "1" indicates occupied, "0" indicates empty.
 	input_packs = [[2,2,[1,0,1,1],2],[1,2,[1,1],2],[2,4,[1,1,1,1,1,0,0,0],1]]
 	myboard = board(np.array([[1, 0, 0, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 0], [1, 1, 0, 0, 0]]), np.zeros((4, 5)))
 ```
