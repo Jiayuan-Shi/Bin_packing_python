@@ -29,7 +29,7 @@ Backtracking through all possible filling possibilities and return the result of
 	a = backtracking(myboard, pack_lists)
 	print(len(a))
 		
-	# Display first solution
+	# Display the first solution
 	print(a[0].color_board)
 	plot_mat(a[0].color_board)
 ```
