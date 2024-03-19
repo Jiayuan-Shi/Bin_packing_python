@@ -16,8 +16,8 @@ Backtracking through all possible filling possibilities and return the result of
 
 ```
 	# [[rows, cols, mat, amount], … ]
-	input_packs = [[1, 3, [1, 1, 1], 2], [1, 4, [1, 1, 1, 1], 2], [2, 3, [1, 1, 1, 1, 1, 1], 1], [2, 2, [1, 1, 1, 1], 1]]
-	myboard = board(np.zeros((4, 5)), np.zeros((4, 5)))
+	input_packs = [[2,2,[1,0,1,1],2],[1,2,[1,1],2],[2,4,[1,1,1,1,1,0,0,0],1]]
+	myboard = board(np.array([[1, 0, 0, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 0], [1, 1, 0, 0, 0]]), np.zeros((4, 5)))
 ```
 
 
@@ -36,5 +36,6 @@ Backtracking through all possible filling possibilities and return the result of
 颜色代表了插入块的种类，最大的插入块索引在前
 The color represents the type of insert block, with the largest insert block index coming first.
 
-![image](https://github.com/Jiayuan-Shi/Bin_packing_python/assets/51028227/dffd53d4-8bb6-44ff-aab2-71684939f8bb)
+![image](https://github.com/Jiayuan-Shi/Bin_packing_python/assets/51028227/9ad18b1f-2ff3-457f-8fb1-9863ff90b47b)
+
 
