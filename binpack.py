@@ -43,22 +43,21 @@ class board():
     def can_place(self, bages, start_row, start_col):
         rows, cols = bages.mat.shape
         if start_row + rows > self.nrows or start_col + cols > self.ncols:
-            print("not fit")
             return False
         test_board = np.copy(self.board)
         test_board[start_row:start_row + rows, start_col:start_col + cols] += bages.mat
-        if np.any(test_board > 1):
+        if np.any(test_board > 1) :
             return False
         return True
     def place(self, bages, start_row, start_col):
         rows, cols = bages.mat.shape
         self.board[start_row:start_row + rows, start_col:start_col + cols] += bages.mat
-        self.color_board[start_row:start_row + rows, start_col:start_col + cols] += bages.type
+        self.color_board[start_row:start_row + rows, start_col:start_col + cols] += bages.type * bages.mat
         return self
     def remove(self, bages, start_row, start_col):
         rows, cols = bages.mat.shape
         self.board[start_row:start_row + rows, start_col:start_col + cols] -= bages.mat
-        self.color_board[start_row:start_row + rows, start_col:start_col + cols] -= bages.type
+        self.color_board[start_row:start_row + rows, start_col:start_col + cols] -= bages.type * bages.mat
         return self
 
 def backpack_collections(input_packs):
@@ -99,6 +98,7 @@ def backtracking(board, pack_lists, pack_index=0, solution_collections=None):
         pack = pack_lists[pack_index]
         for direction in range(4):
             pack_rolled = pack.rolling(direction)
+            #print(pack_rolled.mat)
             for row in range(board.nrows - pack_rolled.nrows + 1):
                 for col in range(board.ncols - pack_rolled.ncols + 1):
                     if board.can_place(pack_rolled, row, col):
@@ -132,17 +132,20 @@ def plot_mat(mat):
 
 def main():
     start = time.time()
-    input_packs = [[1, 3, [1, 1, 1], 2], [1, 4, [1, 1, 1, 1], 2], [2, 3, [1, 1, 1, 1, 1, 1], 1],
-                   [2, 2, [1, 1, 1, 1], 1]]
+    #input_packs = [[1, 3, [1, 1, 1], 2], [1, 4, [1, 1, 1, 1], 2], [2, 3, [1, 1, 1, 1, 1, 1], 1],                   [2, 2, [1, 1, 1, 1], 1]]
+    #input_packs = [[2,2,[1,0,1,1],2],[1,2,[1,1],2],[2,4,[1,1,1,1,1,0,0,0],1]]
+    #plot_mat(np.array(input_packs))
+    input_packs = [[2,2,[1,0,1,1],2],[1,2,[1,1],1]]
     # 示例：初始化board和pack_lists
-    myboard = board(np.zeros((4, 5)), np.zeros((4, 5)))
+    #myboard = board(np.array([[1, 1, 0], [0, 0, 0]]), np.zeros((2, 3)))
+    myboard = board(np.array([[0, 1, 1, 0], [0, 0, 0, 0]]), np.zeros((2, 4)))
     pack_lists = backpack_collections(input_packs)
     a = backtracking(myboard, pack_lists)
     print(len(a))
-    print(a[15].color_board)
-    for i in range(6):
-        print(a[i].color_board)
-    plot_mat(a[15].color_board)
+    print(a[1].color_board)
+
+
+    plot_mat(a[1].color_board)
     end = time.time()
     print('Running time: %s Seconds' % (end - start))
 
