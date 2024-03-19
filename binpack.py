@@ -97,17 +97,21 @@ def backtracking(board, pack_lists, pack_index=0, solution_collections=None):
     if pack_index < len(pack_lists):  # 确保不会超出pack_lists的索引范围
         pack = pack_lists[pack_index]
         for direction in range(4):
-            pack_rolled = pack.rolling(direction)
-            #print(pack_rolled.mat)
+            pack_rolled = copy.deepcopy(pack)
+            pack_rolled = pack_rolled.rolling(direction)
+
             for row in range(board.nrows - pack_rolled.nrows + 1):
                 for col in range(board.ncols - pack_rolled.ncols + 1):
                     if board.can_place(pack_rolled, row, col):
+                        print("pack", pack_rolled.mat)
                         # 如果当前方块可以放置，则放置方块
                         board.place(pack_rolled, row, col)
+                        print("board\n",board.board)
                         # 递归尝试放置下一个方块
                         backtracking(board, pack_lists, pack_index + 1, solution_collections)
                         # 回溯：移除刚才放置的方块
                         board.remove(pack_rolled, row, col)
+                        print("delete\n",board.board)
     # 在当前层级的所有方向和位置尝试后，如果没有成功放置方块，也需要尝试下一个方块
     # 这是为了处理当某个方块无论如何都放不下，但可能其他的方块组合能够成功的情况
     if pack_index + 1 < len(pack_lists):
@@ -135,10 +139,13 @@ def main():
     #input_packs = [[1, 3, [1, 1, 1], 2], [1, 4, [1, 1, 1, 1], 2], [2, 3, [1, 1, 1, 1, 1, 1], 1],                   [2, 2, [1, 1, 1, 1], 1]]
     #input_packs = [[2,2,[1,0,1,1],2],[1,2,[1,1],2],[2,4,[1,1,1,1,1,0,0,0],1]]
     #plot_mat(np.array(input_packs))
+    #input_packs = [[2,2,[1,0,1,1],2],[1,2,[1,1],1]]
     input_packs = [[2,2,[1,0,1,1],2],[1,2,[1,1],1]]
+
     # 示例：初始化board和pack_lists
     #myboard = board(np.array([[1, 1, 0], [0, 0, 0]]), np.zeros((2, 3)))
-    myboard = board(np.array([[0, 1, 1, 0], [0, 0, 0, 0]]), np.zeros((2, 4)))
+    #myboard = board(np.array([[0, 1, 1, 0], [0, 0, 0, 0]]), np.zeros((2, 4)))
+    myboard = board(np.array([[1, 0, 1], [0, 0, 0],[1, 0, 0]]), np.zeros((3, 3)))
     pack_lists = backpack_collections(input_packs)
     a = backtracking(myboard, pack_lists)
     print(len(a))
